@@ -284,6 +284,9 @@ $string['enableextraunenrolmentplugins'] = 'Allow extra unenrolment plugins?';
 $string['enableextraunenrolmentplugins_help'] = 'Use this if you wish to allow for unenrolment of other plugins than "manual"';
 $string['privacy:metadata'] = 'The Mass Enrol local plugin does not store any personal data';
 
+$string['checknonmanualenrolments'] = 'Check enrolments from all plugins when enroling';
+$string['checknonmanualenrolments_help'] = 'Use this if you wish to look at all plugins rather than just "manual" when checking users for existing enrolments.';
+
 $string['defaultvalues'] = 'Default form values';
 $string['defaultcreategroups'] = 'Default create group value';
 $string['defaultcreategroups_help'] = 'This value will be used as the default value of the "Create group(s) if needed" checkbox when mass-enrolling';
