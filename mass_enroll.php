@@ -53,4 +53,3 @@ $PAGE->set_heading($course->fullname . ': ' . $strinscriptions);
 
 $renderer = $PAGE->get_renderer('local_mass_enroll');
 echo $renderer->page_mass_enrol();
-exit;

@@ -28,7 +28,6 @@
  */
 
 namespace local_mass_enroll\privacy;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * The privacy provider.

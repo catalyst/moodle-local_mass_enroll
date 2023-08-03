@@ -27,7 +27,6 @@
  * @copyright   2015 onwards R.J. van Dongen <rogier@sebsoft.nl>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Quick fix for Moodle 2.9
