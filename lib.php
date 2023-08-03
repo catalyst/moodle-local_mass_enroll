@@ -116,6 +116,11 @@ function mass_enroll($cir, $course, $context, $data) {
         $instance = $DB->get_record('enrol', array('id' => $enrolid));
     }
 
+    // Before starting, purge group membership if selected.
+    if (!empty($data->purgegroupsbeforecreating)) {
+        groups_delete_group_members($course->id);
+    }
+
     // Init csv import helper.
     $cir->init();
     while ($fields = $cir->next()) {

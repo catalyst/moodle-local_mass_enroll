@@ -75,6 +75,7 @@ $string['unenroll'] = 'Unenrol them from my course';
 
 $string['mailreport'] = 'Send me a mail report';
 $string['creategroups'] = 'Create group(s) if needed';
+$string['purgegroupsbeforecreating'] = 'Before processing the CSV, remove all group memberships in the course';
 $string['creategroupings'] = 'Create  grouping(s) if needed';
 $string['firstcolumn'] = 'First column contains';
 $string['roleassign'] = 'Role to assign';

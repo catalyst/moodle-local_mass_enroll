@@ -106,7 +106,8 @@ class mass_enroll_test extends advanced_testcase {
             'firstcolumn' => $method,
             'creategroups' => true,
             'creategroupings' => true,
-            'mailreport' => false
+            'mailreport' => false,
+            'purgegroupsbeforecreating' => false
         ];
 
         // Run the import.
@@ -137,5 +138,22 @@ class mass_enroll_test extends advanced_testcase {
 
         // 4. Ensure user 2 got added to both groups.
         $this->assertCount(2, $DB->get_records('groups_members', ['userid' => $user2->id]));
+
+        // Assign these users to a group we don't set in the CSV within the course.
+        // These will be purged by the mass enroll.
+        $group3 = groups_create_group((object) ['courseid' => $course->id, 'name' => 'group3']);
+        groups_add_member($group3, $user1);
+        groups_add_member($group3, $user2);
+        groups_add_member($group3, $user3);
+        groups_add_member($group3, $user3duplicate);
+
+        $this->assertCount(4, groups_get_members($group3));
+
+        // Re-run the mass enroll to purge.
+        $mformdata->purgegroupsbeforecreating = true;
+        mass_enroll($cir, $course, context_course::instance($course->id), $mformdata);
+
+        // 4. Ensure everyone got removed from group 3, because purgegroupsbeforecreating was enabled.
+        $this->assertCount(0, groups_get_members($group3));
     }
 }
