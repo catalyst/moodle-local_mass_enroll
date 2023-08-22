@@ -283,3 +283,9 @@ Please note "manual" cannot be configured as this is the default and will always
 $string['enableextraunenrolmentplugins'] = 'Allow extra unenrolment plugins?';
 $string['enableextraunenrolmentplugins_help'] = 'Use this if you wish to allow for unenrolment of other plugins than "manual"';
 $string['privacy:metadata'] = 'The Mass Enrol local plugin does not store any personal data';
+
+$string['defaultvalues'] = 'Default form values';
+$string['defaultcreategroups'] = 'Default create group value';
+$string['defaultcreategroups_help'] = 'This value will be used as the default value of the "Create group(s) if needed" checkbox when mass-enrolling';
+$string['defaultcreategroupings'] = 'Default create groupings value';
+$string['defaultcreategroupings_help'] = 'This value will be used as the default value of the "Create groupings(s) if needed" checkbox when mass-enrolling';
