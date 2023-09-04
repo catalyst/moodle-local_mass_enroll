@@ -1,5 +1,5 @@
-username,group
-user1,group1
-user2,group1
-user2,group2
-user3,group1
+username,group1,group2
+user1,group1,groupa
+user2,group1,groupa
+user2,group2,groupa
+user3,group1,groupa

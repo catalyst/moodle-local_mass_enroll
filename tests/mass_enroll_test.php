@@ -123,21 +123,24 @@ class mass_enroll_test extends advanced_testcase {
         $this->assertCount(1, $DB->get_records('user_enrolments', ['userid' => $user3duplicate->id,
             'enrolid' => $courseenrol->id]));
 
-        // 2. Two groups should have been auto created in the course.
+        // 2. Three groups should have been auto created in the course.
         $group1 = groups_get_group_by_name($course->id, 'group1');
         $group2 = groups_get_group_by_name($course->id, 'group2');
+        $groupa = groups_get_group_by_name($course->id, 'groupa');
 
         $this->assertNotEmpty($group1);
         $this->assertNotEmpty($group2);
+        $this->assertNotEmpty($groupa);
 
         // 3. Ensure the right number of people got added to each group.
-        // Note with group 1, three users appear in the CSV however the third user has a duplicate account,
+        // Note with group 1 and group a, three users appear in the CSV however the third user has a duplicate account,
         // so actual count will be 4.
         $this->assertCount(4, groups_get_members($group1));
         $this->assertCount(1, groups_get_members($group2));
+        $this->assertCount(4, groups_get_members($groupa));
 
-        // 4. Ensure user 2 got added to both groups.
-        $this->assertCount(2, $DB->get_records('groups_members', ['userid' => $user2->id]));
+        // 4. Ensure user 2 got added to both groups + group a
+        $this->assertCount(3, $DB->get_records('groups_members', ['userid' => $user2->id]));
 
         // Assign these users to a group we don't set in the CSV within the course.
         // These will be purged by the mass enroll.

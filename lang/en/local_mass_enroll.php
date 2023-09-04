@@ -40,13 +40,13 @@ $string['mass_enroll_info'] = '
 With this option you are going to enrol a list of known users from a file with one account per line
 </p>
 <p>
-<b>The firstline</b>, empty lines or unknown accounts will be skipped. </p>
+<b>The first line (header) </b>, empty lines or unknown accounts will be skipped. </p>
 <p>
 The file may contains several columns, separated by a comma, a semi-column or a tabulation.
 <br/>
-<b>The first one must contains a unique account identifier : idnumber (by default) login or email  </b> of the target user. <br/>
+<b>The first column must contain a unique account identifier : idnumber (by default) username or email </b> of the target user. <br/>
 
-The second <b>if present,</b> contains the group name in wich you want that user be be added. <br/>
+Any columns after the first <b>if present</b> are names of groups that you want the user to be added to and (optionally) be created.<br/>
 
 You may repeat this operation at will without damages, for example if you forgot the group for some users.
 </p>
