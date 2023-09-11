@@ -1,5 +1,5 @@
-idnumber,group
-1,group1
-2,group1
-2,group2
-3,group1
+idnumber,group1,group2
+1,group1,groupa
+2,group1,groupa
+2,group2,groupa
+3,group1,groupa

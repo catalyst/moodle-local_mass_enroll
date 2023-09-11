@@ -164,66 +164,69 @@ function mass_enroll($cir, $course, $context, $data) {
                 $enrollablecount++;
             }
 
-            if (empty($fields[1])) {
-                $group = null;
-            } else {
-                $group = str_replace('"', '', trim($fields[1]));
-            }
-            // 2nd column?
-            if (empty($group)) {
-                $result .= "\n";
-                continue; // No group for this one.
-            }
+            // Iterate over the rest of the columns to process as group names.
+            for ($colnum = 1; $colnum < count($fields); $colnum++) {
+                if (empty($fields[$colnum])) {
+                    $group = null;
+                } else {
+                    $group = str_replace('"', '', trim($fields[$colnum]));
+                }
+                // 2nd column?
+                if (empty($group)) {
+                    $result .= "\n";
+                    continue; // No group for this one.
+                }
 
-            // Create group if needed.
-            if (!($gid = mass_enroll_group_exists($group, $course->id))) {
-                if ($data->creategroups) {
-                    if (!($gid = mass_enroll_add_group($group, $course->id))) {
-                        $a->group = $group;
-                        $a->courseid = $course->id;
-                        $result .= get_string('im:error_addg', 'local_mass_enroll', $a) . "\n";
+                // Create group if needed.
+                if (!($gid = mass_enroll_group_exists($group, $course->id))) {
+                    if ($data->creategroups) {
+                        if (!($gid = mass_enroll_add_group($group, $course->id))) {
+                            $a->group = $group;
+                            $a->courseid = $course->id;
+                            $result .= get_string('im:error_addg', 'local_mass_enroll', $a) . "\n";
+                            continue;
+                        }
+                        $createdgroupscount++;
+                        $createdgroups .= " $group";
+                    } else {
+                        $result .= get_string('im:error_g_unknown', 'local_mass_enroll', $group) . "\n";
                         continue;
                     }
-                    $createdgroupscount++;
-                    $createdgroups .= " $group";
-                } else {
-                    $result .= get_string('im:error_g_unknown', 'local_mass_enroll', $group) . "\n";
-                    continue;
                 }
-            }
 
-            // If groupings are enabled on the site (should be?).
-            if (!($gpid = mass_enroll_grouping_exists($group, $course->id))) {
-                if ($data->creategroupings) {
-                    if (!($gpid = mass_enroll_add_grouping($group, $course->id))) {
+                // If groupings are enabled on the site (should be?).
+                if (!($gpid = mass_enroll_grouping_exists($group, $course->id))) {
+                    if ($data->creategroupings) {
+                        if (!($gpid = mass_enroll_add_grouping($group, $course->id))) {
+                            $a->group = $group;
+                            $a->courseid = $course->id;
+                            $result .= get_string('im:error_add_grp', 'local_mass_enroll', $a) . "\n";
+                            continue;
+                        }
+                        $createdgroupingscount++;
+                        $createdgroupings .= " $group";
+                    }
+                }
+                // If grouping existed or has just been created.
+                if ($gpid && !(mass_enroll_group_in_grouping($gid, $gpid))) {
+                    if (!(mass_enroll_add_group_grouping($gid, $gpid))) {
                         $a->group = $group;
-                        $a->courseid = $course->id;
-                        $result .= get_string('im:error_add_grp', 'local_mass_enroll', $a) . "\n";
+                        $result .= get_string('im:error_add_g_grp', 'local_mass_enroll', $a) . "\n";
                         continue;
                     }
-                    $createdgroupingscount++;
-                    $createdgroupings .= " $group";
                 }
-            }
-            // If grouping existed or has just been created.
-            if ($gpid && !(mass_enroll_group_in_grouping($gid, $gpid))) {
-                if (!(mass_enroll_add_group_grouping($gid, $gpid))) {
-                    $a->group = $group;
-                    $result .= get_string('im:error_add_g_grp', 'local_mass_enroll', $a) . "\n";
-                    continue;
-                }
-            }
 
-            // Finally add to group if needed.
-            if (!groups_is_member($gid, $user->id)) {
-                $ok = groups_add_member($gid, $user->id);
-                if ($ok) {
-                    $result .= get_string('im:and_added_g', 'local_mass_enroll', $group) . "\n";
+                // Finally add to group if needed.
+                if (!groups_is_member($gid, $user->id)) {
+                    $ok = groups_add_member($gid, $user->id);
+                    if ($ok) {
+                        $result .= get_string('im:and_added_g', 'local_mass_enroll', $group) . "\n";
+                    } else {
+                        $result .= get_string('im:error_adding_u_g', 'local_mass_enroll', $group) . "\n";
+                    }
                 } else {
-                    $result .= get_string('im:error_adding_u_g', 'local_mass_enroll', $group) . "\n";
+                    $result .= get_string('im:already_in_g', 'local_mass_enroll', $group) . "\n";
                 }
-            } else {
-                $result .= get_string('im:already_in_g', 'local_mass_enroll', $group) . "\n";
             }
         }
     }

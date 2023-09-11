@@ -1,5 +1,5 @@
-email,group
-user1@test.com,group1
-user2@test.com,group1
-user2@test.com,group2
-user3@test.com,group1
+email,group1,group2
+user1@test.com,group1,groupa
+user2@test.com,group1,groupa
+user2@test.com,group2,groupa
+user3@test.com,group1,groupa
