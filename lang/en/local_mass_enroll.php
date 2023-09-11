@@ -107,6 +107,9 @@ $string['im:error_in'] = 'error enroling {$a}';
 $string['im:not_in'] = '{$a} NOT enroled ';
 $string['im:unenrolled_ok'] = '{$a} unenroled ';
 $string['im:error_out'] = 'error unenroling {$a}';
+$string['im:no_identifier_supplied'] = 'First column cannot be blank';
+$string['im:user_deleted'] = 'Cannot enrol deleted user: {$a}';
+$string['im:user_guest'] = 'Cannot enrol the guest user';
 
 $string['im:error_addg'] = 'error adding group {$a->groupe}  to course {$a->courseid} ';
 $string['im:error_g_unknown'] = 'error unkown group {$a} ';

@@ -134,6 +134,16 @@ function mass_enroll($cir, $course, $context, $data) {
         // Get rid on eventual double quotes unfortunately not done by Moodle CSV importer.
         $fields[0] = str_replace('"', '', trim($fields[0]));
 
+        if (empty(implode('', $fields))) {
+            // Empty row, skip it silently.
+            continue;
+        }
+
+        if (empty($fields[0])) {
+            $result .= get_string('im:no_identifier_supplied', 'local_mass_enroll', $fields[0]) . "\n";
+            continue;
+        }
+
         // Search for multiple users, since in some systems the data may not be 100% correct.
         $users = $DB->get_records('user', [$useridfield => $fields[0]]);
 
@@ -144,6 +154,16 @@ function mass_enroll($cir, $course, $context, $data) {
 
         // Iterate over each user account found.
         foreach ($users as $user) {
+            if ($user->deleted) {
+                $result .= get_string('im:user_deleted', 'local_mass_enroll', fullname($user)) . "\n";
+                continue;
+            }
+
+            if ($user->username == 'guest') {
+                $result .= get_string('im:user_guest', 'local_mass_enroll') . "\n";
+                continue;
+            }
+
             // Already enroled?
             // We DO NOT support multiple roles in a course.
             if ($ue = $DB->get_record('user_enrolments', array('enrolid' => $instance->id, 'userid' => $user->id))) {
