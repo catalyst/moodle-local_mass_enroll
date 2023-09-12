@@ -30,17 +30,11 @@ defined('MOODLE_INTERNAL') || die();
 function local_mass_enroll_clean_guest_enrolments() {
     global $DB;
 
-    $guestuser = core_user::get_user_by_username('guest');
-
-    $count = 0;
+    $guestuser = guest_user();
 
     foreach ($DB->get_records('user_enrolments', ['userid' => $guestuser->id]) as $enrolment) {
         $instance = $DB->get_record('enrol', ['id' => $enrolment->enrolid]);
         $plugin = enrol_get_plugin($instance->enrol);
         $plugin->unenrol_user($instance, $guestuser->id);
-
-        $count += 1;
     }
-
-    return $count;
 }

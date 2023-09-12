@@ -14,17 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Upgrade code for local_mass_enroll
- *
- * @package     local_mass_enroll
- * @author Andrew Hancox <andrewdchancox@googlemail.com>
- * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
- * @link https://opensourcelearning.co.uk
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright 2023, Andrew Hancox
- */
-
 namespace local_mass_enroll;
 
 use advanced_testcase;
@@ -32,7 +21,7 @@ use context_course;
 use csv_import_reader;
 
 /**
- * Mass enrol unit tests
+ * Mass enrol unit tests checking error states
  *
  * @package   local_mass_enroll
  * @copyright 2023, Andrew Hancox
@@ -64,15 +53,16 @@ class mass_enroll_errorstates_test extends advanced_testcase {
      * @param string $fixturefile Name of .csv in test fixtures directory to use
      * @param string $messagecontains Warning message that should appear
      * @dataProvider errorstates_provider
-     * @covers \local_mass_enroll\mass_enroll
+     * @covers       \local_mass_enroll\mass_enroll
      */
     public function test_mass_enroll_blankidnumber(string $fixturefile, string $messagecontains) {
         global $DB, $CFG;
-        require_once(__DIR__.'/../lib.php');
+        require_once(__DIR__ . '/../lib.php');
         require_once($CFG->libdir . '/csvlib.class.php');
 
         $this->resetAfterTest();
         $course = $this->getDataGenerator()->create_course();
+        $guestuser = guest_user();
 
         $users = [];
 
@@ -81,18 +71,18 @@ class mass_enroll_errorstates_test extends advanced_testcase {
         }
         $this->getDataGenerator()->create_user(['idnumber' => 'deleted']);
 
-        $DB->execute("update {user} set idnumber = 'guest' where username = 'guest'");
-        $DB->execute("update {user} set deleted = 1 where idnumber = 'deleted'");
+        $DB->set_field('user', 'idnumber', 'guest', ['id' => $guestuser->id]);
+        $DB->set_field('user', 'deleted', true, ['idnumber' => 'deleted']);
 
         // Import test data.
-        $content = file_get_contents(__DIR__ . '/fixtures/' .  $fixturefile);
+        $content = file_get_contents(__DIR__ . '/fixtures/' . $fixturefile);
         $iid = csv_import_reader::get_new_iid('uploaduser');
         $cir = new csv_import_reader($iid, 'uploaduser');
         $cir->load_csv_content($content, 'UTF-8', 'comma');
 
         // Fake the moodle form data.
         $studentrole = $DB->get_record('role', ['shortname' => 'student']);
-        $mformdata = (object) [
+        $mformdata = (object)[
             'roleassign' => $studentrole->id,
             'firstcolumn' => 'idnumber',
             'creategroups' => true,

@@ -14,17 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Upgrade code for local_mass_enroll
- *
- * @package     local_mass_enroll
- * @author Andrew Hancox <andrewdchancox@googlemail.com>
- * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
- * @link https://opensourcelearning.co.uk
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright 2023, Andrew Hancox
- */
-
 namespace local_mass_enroll;
 
 use advanced_testcase;
@@ -32,7 +21,7 @@ use context_course;
 use csv_import_reader;
 
 /**
- * Mass enrol unit tests
+ * Mass enrol unit tests checking upgrade steps
  *
  * @package   local_mass_enroll
  * @copyright 2023, Andrew Hancox
@@ -47,7 +36,7 @@ class mass_enroll_upgradelib_test extends advanced_testcase {
 
         require_once("$CFG->dirroot/local/mass_enroll/db/upgradelib.php");
 
-        $guestuser = \core_user::get_user_by_username('guest');
+        $guestuser = guest_user();
 
         for ($i = 0; $i<3;$i++) {
             $course = $this->getDataGenerator()->create_course();

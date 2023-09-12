@@ -152,6 +152,8 @@ function mass_enroll($cir, $course, $context, $data) {
             continue;
         }
 
+        $guestuser = guest_user();
+
         // Iterate over each user account found.
         foreach ($users as $user) {
             if ($user->deleted) {
@@ -159,7 +161,7 @@ function mass_enroll($cir, $course, $context, $data) {
                 continue;
             }
 
-            if ($user->username == 'guest') {
+            if ($user->id == $guestuser->id) {
                 $result .= get_string('im:user_guest', 'local_mass_enroll') . "\n";
                 continue;
             }
