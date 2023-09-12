@@ -14,17 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Upgrade code for local_mass_enroll
- *
- * @package     local_mass_enroll
- * @author Andrew Hancox <andrewdchancox@googlemail.com>
- * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
- * @link https://opensourcelearning.co.uk
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @copyright 2023, Andrew Hancox
- */
-
 namespace local_mass_enroll;
 
 use advanced_testcase;
@@ -32,7 +21,7 @@ use context_course;
 use csv_import_reader;
 
 /**
- * Mass enrol unit tests
+ * Mass enrol unit tests checking checknonmanualenrolments option is respected
  *
  * @package   local_mass_enroll
  * @copyright 2023, Andrew Hancox
@@ -114,6 +103,7 @@ class checknonmanualenrolments_test extends advanced_testcase {
             $this->assertCount(1, $DB->get_records('user_enrolments', ['userid' => $users[$i]->id, 'enrolid' => $courseenrol->id]));
         }
 
+        // 2. This user should have one or two enrolments based on the parameters the test runs with
         $this->assertCount($checknonmanualenrolments ? 1 : 2, $DB->get_records('user_enrolments', ['userid' => $alreadyenrolleduser->id]));
     }
 }
