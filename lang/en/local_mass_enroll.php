@@ -85,28 +85,28 @@ $string['mail_enrolment_subject'] = 'Bulk enrolments on {$a}';
 $string['mail_unenrolment_subject'] = 'Bulk unenrolments on {$a}';
 $string['mail_enrolment'] = '
 Hello,
-You just enroled the following list of users to your course \'{$a->course}\'.
+You just enrolled the following list of users to your course \'{$a->course}\'.
 Here is a report of operations :
 {$a->report}
 Sincerly.
 ';
 $string['mail_unenrolment'] = '
 Hello,
-You just unenroled the following list of users to your course \'{$a->course}\'.
+You just unenrolled the following list of users to your course \'{$a->course}\'.
 Here is a report of operations :
 {$a->report}
 Sincerly.
 ';
 $string['email_sent'] = 'email sent to {$a}';
-$string['im:using_role'] = 'Enroling users as : {$a} ';
+$string['im:using_role'] = 'Enrolling users as : {$a} ';
 $string['im:opening_file'] = 'Opening file : {$a} ';
 $string['im:user_unknown'] = '{$a} unknown - skipping line';
-$string['im:already_in'] = '{$a} already enroled ';
-$string['im:enrolled_ok'] = '{$a} enroled ';
-$string['im:error_in'] = 'error enroling {$a}';
-$string['im:not_in'] = '{$a} NOT enroled ';
-$string['im:unenrolled_ok'] = '{$a} unenroled ';
-$string['im:error_out'] = 'error unenroling {$a}';
+$string['im:already_in'] = '{$a} already enrolled ';
+$string['im:enrolled_ok'] = '{$a} enrolled ';
+$string['im:error_in'] = 'error enrolling {$a}';
+$string['im:not_in'] = '{$a} NOT enrolled ';
+$string['im:unenrolled_ok'] = '{$a} unenrolled ';
+$string['im:error_out'] = 'error unenrolling {$a}';
 $string['im:no_identifier_supplied'] = 'First column cannot be blank';
 $string['im:user_deleted'] = 'Cannot enrol deleted user: {$a}';
 $string['im:user_guest'] = 'Cannot enrol the guest user';
@@ -118,8 +118,8 @@ $string['im:error_add_g_grp'] = 'error adding group {$a->groupe} to grouping {$a
 $string['im:and_added_g'] = ' and added to Moodle\'s  group  {$a}';
 $string['im:error_adding_u_g'] = 'error adding to group  {$a}';
 $string['im:already_in_g'] = ' already in group {$a}';
-$string['im:stats_i'] = '{$a} enroled';
-$string['im:stats_ui'] = '{$a} unenroled';
+$string['im:stats_i'] = '{$a} enrolled';
+$string['im:stats_ui'] = '{$a} unenrolled';
 $string['im:stats_g'] = '{$a->nb} group(s) created : {$a->what}';
 $string['im:stats_grp'] = '{$a->nb} grouping(s) created : {$a->what}';
 $string['im:err_opening_file'] = 'error opening file {$a}';
@@ -160,7 +160,7 @@ You may unselect options to create groups and groupings if you are sure that the
 </p>
 
 <p>
-By default the users will be enroled as students but you may select other roles that you are allowed to manage (teacher, non editing teacher
+By default the users will be enrolled as students but you may select other roles that you are allowed to manage (teacher, non editing teacher
 or any custom roles)
 </p>
 
@@ -251,7 +251,7 @@ All other columns will be ignored. </p>
 
 
 <p>
-By default the users will be enroled as students but you may select other roles that you are allowed to manage (teacher, non editing teacher
+By default the users will be enrolled as students but you may select other roles that you are allowed to manage (teacher, non editing teacher
 or any custom roles)
 </p>
 
