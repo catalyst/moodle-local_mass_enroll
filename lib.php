@@ -171,9 +171,9 @@ function mass_enroll($cir, $course, $context, $data) {
             // Already enroled?
             // We DO NOT support multiple roles in a course.
             if ($checknonmanualenrolments && user_has_role_assignment($user->id, $roleid, $context->id)) {
-                $result .= get_string('im:already_in', 'local_mass_enroll', fullname($user));
+                $result .= get_string('im:already_in', 'local_mass_enroll', fullname($user)) . "\n";
             } else if ($DB->record_exists('user_enrolments', array('enrolid' => $instance->id, 'userid' => $user->id))) {
-                $result .= get_string('im:already_in', 'local_mass_enroll', fullname($user));
+                $result .= get_string('im:already_in', 'local_mass_enroll', fullname($user)) . "\n";
             } else {
                 // Take care of timestart/timeend in course settings.
                 $timestart = time();
@@ -186,7 +186,7 @@ function mass_enroll($cir, $course, $context, $data) {
                 }
                 // Enrol the user with this plugin instance (unfortunately return void, no more status).
                 $plugin->enrol_user($instance, $user->id, $roleid, $timestart, $timeend);
-                $result .= get_string('im:enrolled_ok', 'local_mass_enroll', fullname($user));
+                $result .= get_string('im:enrolled_ok', 'local_mass_enroll', fullname($user)) . "\n";
                 $enrollablecount++;
             }
 
