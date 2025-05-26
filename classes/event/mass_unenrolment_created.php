@@ -96,23 +96,6 @@ class mass_unenrolment_created extends \core\event\base {
     }
 
     /**
-     * Return legacy logdata.
-     *
-     * @return null|array of parameters to be passed to legacy add_to_log() function.
-     */
-    public function get_legacy_logdata() {
-        // Override if you are migrating an add_to_log() call.
-        // Path must be relative to 'module name', here 'course'.
-        // Rev 12/11/2014 : some core function (get_recent_enrolments()) expect the
-        // info field of log record to be integer when action field is 'enrol'.
-        // This produced fatal SQL errors with PostGres see https://github.com/patrickpollet/moodle_local_mass_enroll/issues/5
-        // so we changed action value from 'unenrol' to 'massunenrol'.
-        return array($this->courseid, 'course', 'massunenroll',
-            '../local/mass_enroll/mass_enroll.php?id=' . $this->courseid,
-            $this->other['info']);
-    }
-
-    /**
      * Custom validation.
      *
      * @throws \coding_exception
