@@ -68,11 +68,21 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_configcheckbox('local_mass_enroll/enablemassunenrol',
         get_string('enablemassunenrol', 'local_mass_enroll'),
         get_string('enablemassunenrol_help', 'local_mass_enroll'), 1));
-    
+
     // Default values section.
     $settings->add(new admin_setting_heading('local_mass_enroll/defaultvalues',
         get_string('defaultvalues', 'local_mass_enroll'),
         ''));
+
+    $ids = [
+        'idnumber' => get_string('idnumber', 'local_mass_enroll'),
+        'username' => get_string('username', 'local_mass_enroll'),
+        'email' => get_string('email'),
+    ];
+    $settings->add(new admin_setting_configselect('local_mass_enroll/defaultfirstcolumn',
+        get_string('defaultfirstcolumn', 'local_mass_enroll'),
+        get_string('defaultfirstcolumn_help', 'local_mass_enroll'),
+        'idnumber', $ids));
 
     $settings->add(new admin_setting_configcheckbox('local_mass_enroll/defaultcreategroups',
         get_string('defaultcreategroups', 'local_mass_enroll'),
