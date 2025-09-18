@@ -291,6 +291,8 @@ $string['checknonmanualenrolments'] = 'Check enrolments from all plugins when en
 $string['checknonmanualenrolments_help'] = 'Use this if you wish to look at all plugins rather than just "manual" when checking users for existing enrolments.';
 
 $string['defaultvalues'] = 'Default form values';
+$string['defaultfirstcolumn'] = 'Default first column value';
+$string['defaultfirstcolumn_help'] = 'This value will be used as the default value of the "First column contains" select menu when mass-enrolling';
 $string['defaultcreategroups'] = 'Default create group value';
 $string['defaultcreategroups_help'] = 'This value will be used as the default value of the "Create group(s) if needed" checkbox when mass-enrolling';
 $string['defaultcreategroupings'] = 'Default create groupings value';
